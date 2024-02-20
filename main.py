@@ -1,9 +1,8 @@
+# Problem statement
+
 # Put- depreciation by 5, 10, 20, 30, 40 in percentage
 # Call- appreciation by 5, 10, 20, 30, 40 in percentage
-# Strike price from user
-# Spot price from user
 # Calculate Expected gains
-# Ask price to vary between call and put on the basis of appreciation and depreciation
 # App_Expected_gains = (1.05(spot_price) - strike_price)/call ask_price
 # Dep_Expected_gains = (strike_price - 0.95(spot_price)/put ask_price
 # Calculate no of frequency
@@ -133,7 +132,7 @@ def main():
 
         # Conversion from JSON to CSV
         status = covert_json_to_csv(arrdata)
-        print({"status": True})
+        print({"status": status})
 
     except Exception as error:
         print({"status": False, "error": error})
