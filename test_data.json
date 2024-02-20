@@ -1,0 +1,121 @@
+[
+  {
+    "Call Ask Price": "2,214.40",
+    "Expiry Date": "22/02/2024",
+    "Put Ask Price": "1.30",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "2,258.60",
+    "Expiry Date": "29/02/2024",
+    "Put Ask Price": "3.25",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "2,329.45",
+    "Expiry Date": "07/03/2024",
+    "Put Ask Price": "7.15",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "2,356.55",
+    "Expiry Date": "14/03/2024",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "2,406.70",
+    "Expiry Date": "28/03/2024",
+    "Put Ask Price": "22.05",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "2,550.00",
+    "Expiry Date": "25/04/2024",
+    "Put Ask Price": "45.30",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "2,867.60",
+    "Expiry Date": "27/06/2024",
+    "Put Ask Price": "185.35",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "26/09/2024",
+    "Put Ask Price": "450.00",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "3,501.15",
+    "Expiry Date": "26/12/2024",
+    "Put Ask Price": "277.00",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "26/06/2025",
+    "Put Ask Price": "585.00",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "5,000.00",
+    "Expiry Date": "24/12/2025",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "25/06/2026",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "31/12/2026",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "24/06/2027",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "30/12/2027",
+    "Put Ask Price": "599.95",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "29/06/2028",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  },
+  {
+    "Call Ask Price": "-",
+    "Expiry Date": "28/12/2028",
+    "Put Ask Price": "-",
+    "spot price": 22000,
+    "strike price": 20000
+  }
+]

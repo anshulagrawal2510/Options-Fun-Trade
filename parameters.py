@@ -1,0 +1,8 @@
+STRIKE_PRICE = 20000
+SPOT_PRICE = 22000
+FILE_NAME = "Nifty20000"
+LIST_OF_PERCENTAGE = [5, 10, 20, 30, 40]
+
+
+
+FILE_FULL_PATH = "/Users/anshulagrawal/Downloads/" + FILE_NAME + ".csv"
