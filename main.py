@@ -127,7 +127,7 @@ def main():
             row['Expiry Date'] = now.strftime("%d/%m/%Y")
 
         out = json.dumps(arrdata)
-        jsonfile = open('Output Data/output.json', 'w')
+        jsonfile = open('../output.json', 'w')
         jsonfile.write(out)
 
         # Conversion from JSON to CSV

@@ -9,7 +9,7 @@ def diff_month(d1, d2):
 def covert_json_to_csv(json_data):
     try:
         df = pd.DataFrame(json_data)
-        df.to_csv("Output Data/output.csv")
+        df.to_csv("../output.csv")
         return True
     except Exception as error:
         print(error)
