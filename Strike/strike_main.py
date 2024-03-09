@@ -16,7 +16,8 @@
 import csv
 import json
 from datetime import datetime
-from strike_parameters import SPOT_PRICE, STRIKE_PRICE, FILE_FULL_PATH
+
+from strike_parameters import SPOT_PRICE, STRIKE_PRICE, FILE_FULL_PATH, LIST_OF_PERCENTAGE
 from utils.utils import diff_month, covert_json_to_csv, replace_with_null, expected_gains_no_of_frequency
 
 
@@ -78,7 +79,7 @@ def main():
                 row['Put Ask Price'] = float(row['Put Ask Price'].replace(',', ''))
 
             # Depreciation and appreciation % data
-            return_data = expected_gains_no_of_frequency(row)
+            return_data = expected_gains_no_of_frequency(row, LIST_OF_PERCENTAGE)
             if return_data['success']:
                 row = return_data['row']
             else:
@@ -100,7 +101,7 @@ def main():
         jsonfile.write(out)
 
         # Conversion from JSON to CSV
-        status = covert_json_to_csv(arrdata)
+        status = covert_json_to_csv(arrdata, date=False)
         print({"success": status})
 
     except Exception as error:
