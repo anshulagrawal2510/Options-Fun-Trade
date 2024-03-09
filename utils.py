@@ -1,5 +1,5 @@
 import pandas as pd
-from parameters import SPOT_PRICE, STRIKE_PRICE
+from parameters import SPOT_PRICE, STRIKE_PRICE, LIST_OF_PERCENTAGE
 
 
 def diff_month(d1, d2):
@@ -47,3 +47,40 @@ def depre_expected_gains(ask_price, percent):
     except Exception as error:
         print(error)
         return ''
+
+
+def expected_gains_no_of_frequency(row):
+    try:
+        diff_months = row['Difference months']
+
+        for percent in LIST_OF_PERCENTAGE:
+            appre_expected_gain_column_name = str(percent) + ' Appreciation Expected Gain'
+            appre_no_of_frequecny_column_name = str(percent) + ' Appreciation No of frequency'
+            depr_expected_gain_column_name = str(percent) + ' Depreciation Expected Gain'
+            depr_no_of_frequecny_column_name = str(percent) + ' Depreciation No of frequency'
+
+            # Call Appreciation data
+            appr_expected_gain = appr_expected_gains(row['Call Ask Price'], percent)
+            row[appre_expected_gain_column_name] = appr_expected_gain
+
+            # calculate No of frequency
+
+            # Put Depreciation data
+            dep_expected_gain = depre_expected_gains(row['Put Ask Price'], percent)
+            row[depr_expected_gain_column_name] = dep_expected_gain
+
+            # calculate No of frequency
+            row[appre_no_of_frequecny_column_name] = ""
+            row[depr_no_of_frequecny_column_name] = ""
+            if diff_months:
+                if appr_expected_gain:
+                    no_of_frequency = round(appr_expected_gain * diff_months, 4)
+                    row[appre_no_of_frequecny_column_name] = no_of_frequency
+                if dep_expected_gain:
+                    no_of_frequency = round(dep_expected_gain * diff_months, 4)
+                    row[depr_no_of_frequecny_column_name] = no_of_frequency
+
+        return {"success": True, "row": row}
+
+    except Exception as error:
+        return {"success": False, "error":  error}

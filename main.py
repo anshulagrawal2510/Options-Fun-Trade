@@ -17,7 +17,8 @@ import csv
 import json
 from datetime import datetime
 from parameters import SPOT_PRICE, STRIKE_PRICE, FILE_FULL_PATH, LIST_OF_PERCENTAGE
-from utils import diff_month, covert_json_to_csv, replace_with_null, appr_expected_gains, depre_expected_gains
+from utils import diff_month, covert_json_to_csv, replace_with_null, appr_expected_gains, depre_expected_gains, \
+    expected_gains_no_of_frequency
 
 
 def main():
@@ -30,6 +31,10 @@ def main():
                       "CHNG", "LTP", "IV", "VOLUME", "CHNGINOI", "OI", "extras")
         reader = csv.DictReader(csvfile, fieldnames)
 
+        unwanted_columns = ["ID", "COI", "CCHNGINOI", "CVOLUME", "CIV", "CLTP", "CCHNG", "CBIDQTY", "CBIDPRICE",
+                            "CASKQTY", "BIDQTY", "BIDPRICE", "ASKQTY", "CHNG", "LTP", "IV", "VOLUME", "CHNGINOI",
+                            "OI", "extras"]
+
         arrdata = []
 
         for row in reader:
@@ -38,30 +43,14 @@ def main():
         # Removing headers from the csv file
         arrdata = arrdata[2:]
 
+        arr_data_len = len(arrdata)
+
         # Data conversion
-        for row in arrdata:
+        for index, row in enumerate(arrdata):
 
             # Remove unwanted data
-            row.pop("ID")
-            row.pop("COI")
-            row.pop("CCHNGINOI")
-            row.pop("CVOLUME")
-            row.pop("CIV")
-            row.pop("CLTP")
-            row.pop("CCHNG")
-            row.pop("CBIDQTY")
-            row.pop("CBIDPRICE")
-            row.pop("CASKQTY")
-            row.pop("BIDQTY")
-            row.pop("BIDPRICE")
-            row.pop("ASKQTY")
-            row.pop("CHNG")
-            row.pop("LTP")
-            row.pop("IV")
-            row.pop("VOLUME")
-            row.pop("CHNGINOI")
-            row.pop("OI")
-            row.pop("extras")
+            for key in unwanted_columns:
+                row.pop(key)
 
             # Replace - with null values
             row = replace_with_null(row)
@@ -77,12 +66,11 @@ def main():
                 row['Expiry Date'] = expiry_date
 
             # Calculate Diff months
-            diff_months = ""
+            row['Difference months'] = ''
+            diff_months = ''
             if expiry_date:
                 diff_months = diff_month(expiry_date, current_date)
                 row['Difference months'] = diff_months
-            else:
-                row['Difference months'] = ""
 
             # Data conversion from string to float
             if row['Call Ask Price']:
@@ -91,40 +79,22 @@ def main():
                 row['Put Ask Price'] = float(row['Put Ask Price'].replace(',', ''))
 
             # Depreciation and appreciation % data
-            for percent in LIST_OF_PERCENTAGE:
-
-                # Call Appreciation data
-                appr_expected_gain = appr_expected_gains(row['Call Ask Price'], percent)
-                row[str(percent) + '% Appreciation Expected Gain'] = appr_expected_gain
-
-                # calculate No of frequency
-                if appr_expected_gain and diff_months:
-                    no_of_frequency = round(appr_expected_gain * diff_months, 4)
-                    row[str(percent) + '% Appreciation No of Frequency'] = no_of_frequency
-                else:
-                    row[str(percent) + '% Appreciation No of Frequency'] = ""
-
-                # Put Depreciation data
-                dep_expected_gain = depre_expected_gains(row['Put Ask Price'], percent)
-                row[str(percent) + '% Depreciation Expected Gain'] = dep_expected_gain
-
-                # calculate No of frequency
-                if dep_expected_gain and diff_months:
-                    no_of_frequency = round(dep_expected_gain * diff_months, 4)
-                    row[str(percent) + '% Depreciation No of Frequency'] = no_of_frequency
-                else:
-                    row[str(percent) + '% Depreciation No of Frequency'] = ""
+            return_data = expected_gains_no_of_frequency(row)
+            if return_data['success']:
+                row = return_data['row']
+            else:
+                raise Exception
 
             for row_key, row_value in row.items():
                 if not row_value:
                     row[row_key] = '-'
 
-        arrdata = sorted(arrdata, key=lambda i: i['Expiry Date'])
-
-        # Converting date object to string
-        for row in arrdata:
-            now = row['Expiry Date']
-            row['Expiry Date'] = now.strftime("%d/%m/%Y")
+            if arr_data_len - 1 == index:
+                arrdata = sorted(arrdata, key=lambda i: i['Expiry Date'])
+                for exp_row in arrdata:
+                    if exp_row['Expiry Date']:
+                        now = exp_row['Expiry Date']
+                        exp_row['Expiry Date'] = now.strftime("%d/%m/%Y")
 
         out = json.dumps(arrdata)
         jsonfile = open('../output.json', 'w')
@@ -132,10 +102,10 @@ def main():
 
         # Conversion from JSON to CSV
         status = covert_json_to_csv(arrdata)
-        print({"status": status})
+        print({"success": status})
 
     except Exception as error:
-        print({"status": False, "error": error})
+        print({"success": False, "error": error})
 
 
 main()
