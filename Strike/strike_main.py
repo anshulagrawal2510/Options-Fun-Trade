@@ -16,7 +16,7 @@
 import csv
 import json
 from datetime import datetime
-from Strike_parameters import SPOT_PRICE, STRIKE_PRICE, FILE_FULL_PATH
+from strike_parameters import SPOT_PRICE, STRIKE_PRICE, FILE_FULL_PATH
 from utils.utils import diff_month, covert_json_to_csv, replace_with_null, expected_gains_no_of_frequency
 
 

@@ -3,10 +3,11 @@
 # no of frequency = expected gains * diff months
 # Expiry date from the params.py
 # Problem statement
+
 import csv
 import json
 from datetime import datetime
-from Date_parameters import SPOT_PRICE, FILE_FULL_PATH
+from date_parameters import SPOT_PRICE, FILE_FULL_PATH, EXPIRY_DATE
 from utils.utils import diff_month, covert_json_to_csv, replace_with_null, expected_gains_no_of_frequency
 
 
@@ -16,7 +17,7 @@ def main():
         csvfile = open(FILE_FULL_PATH, 'r')
 
         fieldnames = ("ID", "COI", "CCHNGINOI", "CVOLUME", "CIV", "CLTP", "CCHNG", "CBIDQTY", "CBIDPRICE",
-                      "Call Ask Price", "CASKQTY", "STRIKE", "BIDQTY", "BIDPRICE", "Put Ask Price", "ASKQTY",
+                      "Call Ask Price", "CASKQTY", "strike price", "BIDQTY", "BIDPRICE", "Put Ask Price", "ASKQTY",
                       "CHNG", "LTP", "IV", "VOLUME", "CHNGINOI", "OI", "extras")
         reader = csv.DictReader(csvfile, fieldnames)
 
@@ -46,7 +47,7 @@ def main():
 
             # Adding the rows for spot price and strike price
             row['spot price'] = SPOT_PRICE
-            row['strike price'] = STRIKE_PRICE
+            row['Expiry Date'] = EXPIRY_DATE
 
             # Changing date string to date object
             expiry_date = ""
