@@ -1,5 +1,5 @@
 import pandas as pd
-from parameters import SPOT_PRICE, STRIKE_PRICE, LIST_OF_PERCENTAGE
+from Strike.Strike_parameters import SPOT_PRICE, STRIKE_PRICE, LIST_OF_PERCENTAGE
 
 
 def diff_month(d1, d2):
