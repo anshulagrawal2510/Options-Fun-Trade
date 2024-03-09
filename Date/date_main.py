@@ -27,6 +27,9 @@ def main():
                             "OI", "extras"]
 
         arrdata = []
+        expiry_date = EXPIRY_DATE
+        if expiry_date:
+            expiry_date = datetime.strptime(expiry_date, '%d-%b-%Y')
 
         for row in reader:
             arrdata.append(row)
@@ -48,13 +51,7 @@ def main():
 
             # Adding the rows for spot price and strike price
             row['spot price'] = SPOT_PRICE
-            row['Expiry Date'] = EXPIRY_DATE
-
-            # Changing date string to date object
-            expiry_date = ""
-            if row['Expiry Date']:
-                expiry_date = datetime.strptime(row['Expiry Date'], '%d-%b-%Y')
-                row['Expiry Date'] = expiry_date
+            row['Expiry Date'] = expiry_date
 
             # Calculate Diff months
             row['Difference months'] = ''

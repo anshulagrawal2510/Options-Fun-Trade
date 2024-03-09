@@ -1,6 +1,6 @@
 STRIKE_PRICE = 21000
 SPOT_PRICE = 22500
 FILE_NAME = "21000"
-LIST_OF_PERCENTAGE = [5, 10, 20, 30, 40]
 
+LIST_OF_PERCENTAGE = [5, 10, 20, 30, 40]
 FILE_FULL_PATH = "/Users/anshulagrawal/Downloads/" + FILE_NAME + ".csv"
